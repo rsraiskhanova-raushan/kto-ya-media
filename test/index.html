@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тест «Кто я»</title>
+<meta name="description" content="7 вопросов — и Вы узнаете, в какой среде Ваша ценность как руководителя максимальна. Раушан Райсханова, Academia369.">
+<meta property="og:title" content="Тест «Кто я» — в какой среде Ваша ценность максимальна">
+<meta property="og:description" content="7 вопросов для руководителей. Результат — сразу.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F2EE; --card:#FFFFFF; --ink:#2A1F27; --muted:#6B5563;
+  --accent:#6B2D5C; --accent-soft:#F1E4EC; --line:#E6DAE1; --ok:#3E7C5A;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#1A1418; --card:#241C22; --ink:#F3ECF0; --muted:#B9A8B3; --accent:#D59BC4; --accent-soft:#3A2A35; --line:#3A2F37; }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:560px;margin:0 auto;padding:28px 16px 48px;min-height:100vh;display:flex;flex-direction:column}
+.brand{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
+h1,h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;line-height:1.15;margin:0 0 14px}
+h1{font-size:40px}
+h2{font-size:28px}
+p{margin:0 0 14px}
+.lead{font-size:18px;color:var(--muted)}
+.btn{display:block;width:100%;text-align:center;border:0;border-radius:14px;padding:16px 18px;font:600 16px Inter,sans-serif;cursor:pointer;text-decoration:none;transition:transform .08s ease,opacity .15s}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--accent);color:#fff}
+@media (prefers-color-scheme: dark){.btn-primary{color:#1A1418}}
+.btn-ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent);margin-top:10px}
+.meta{display:flex;gap:18px;margin:22px 0 28px;color:var(--muted);font-size:14px}
+.meta b{color:var(--ink);font-weight:600}
+.progress{height:4px;background:var(--line);border-radius:4px;overflow:hidden;margin-bottom:10px}
+.progress i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s ease}
+.step{font-size:13px;color:var(--muted);margin-bottom:18px}
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.opt{text-align:left;background:var(--card);color:var(--ink);border:1.5px solid var(--line);border-radius:14px;padding:15px 16px;font:500 16px Inter,sans-serif;cursor:pointer;transition:border-color .15s,background .15s}
+.opt:hover{border-color:var(--accent)}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.back{background:none;border:0;color:var(--muted);font:500 14px Inter,sans-serif;padding:14px 0;cursor:pointer;align-self:flex-start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 20px;margin:18px 0}
+.tag{display:inline-block;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:13px;border-radius:20px;padding:5px 12px;margin-bottom:12px}
+.bars{margin:6px 0 4px}
+.bar{display:grid;grid-template-columns:110px 1fr 28px;align-items:center;gap:10px;font-size:14px;margin:8px 0}
+.bar span{color:var(--muted)}
+.bar .t{height:8px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar .t i{display:block;height:100%;background:var(--accent);border-radius:6px}
+.bar b{text-align:right;font-weight:600}
+.second{font-size:15px;color:var(--muted)}
+.foot{margin-top:auto;padding-top:36px;font-size:13px;color:var(--muted);text-align:center}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">Раушан Райсханова · Academia369</div>
+
+  <section id="intro">
+    <h1>Тест «Кто я»</h1>
+    <p class="lead">В какой среде Ваша ценность как руководителя максимальна?</p>
+    <p>Один и тот же руководитель может быть незаменимым в одной компании и чужим в другой. Дело не в Вас — дело в среде.</p>
+    <div class="meta"><div><b>7</b> вопросов</div><div><b>2</b> минуты</div><div>Результат <b>сразу</b></div></div>
+    <button class="btn btn-primary" id="start">Начать тест</button>
+  </section>
+
+  <section id="quiz" class="hidden">
+    <div class="progress"><i id="bar"></i></div>
+    <div class="step" id="step"></div>
+    <h2 id="q"></h2>
+    <div class="opts" id="opts"></div>
+    <button class="back" id="back">← Назад</button>
+  </section>
+
+  <section id="result" class="hidden">
+    <div class="tag">Ваш результат</div>
+    <h2 id="rTitle"></h2>
+    <p id="rText"></p>
+    <p class="second" id="rSecond"></p>
+    <div class="card">
+      <div class="bars" id="bars"></div>
+    </div>
+    <div class="card">
+      <h2 style="font-size:24px">Что с этим делать дальше?</h2>
+      <p>Тест показывает направление. На бесплатной встрече (20 минут, онлайн) мы разберем Ваш результат и я подскажу, какой следующий шаг даст Вам наибольший эффект.</p>
+      <a class="btn btn-primary" id="book" target="_blank" rel="noopener">Выбрать время встречи</a>
+      <a class="btn btn-ghost" id="dm" target="_blank" rel="noopener">Написать мне в Instagram</a>
+    </div>
+    <button class="back" id="again">Пройти тест заново</button>
+  </section>
+
+  <div class="foot">© 2026 Раушан Райсханова · Academia369</div>
+</div>
+
+<script>
+// Ссылка на страницу записи в Google Календаре. Пока ее нет — кнопка ведет в Direct.
+var BOOKING_URL = "";
+var DM_URL = "https://ig.me/m/raushan_raiskhanova";
+
+var Q = [
+ ["Когда Вам по-настоящему интересно на работе?",["Когда создаю с нуля то, чего еще нет","Когда выстраиваю систему и команду под рост","Когда нужно навести порядок в сложной ситуации","Когда все работает четко и предсказуемо","Когда идут переговоры, оценка, крупная сделка"]],
+ ["Какое решение Вы принимаете увереннее всего?",["Запустить новое в условиях неопределенности","Масштабировать то, что уже работает","Остановить то, что не окупается","Усилить контроль и снизить риски","Определить цену и условия сделки"]],
+ ["Что утомляет Вас быстрее всего?",["Регламенты и долгие согласования","Хаос без системы","Спокойная рутина без вызовов","Постоянные резкие перемены","Работа без внешних партнеров и инвесторов"]],
+ ["Как Вас, скорее всего, описали бы коллеги?",["Первопроходец","Строитель","Антикризисный руководитель","Надежный системный управленец","Переговорщик"]],
+ ["Какой горизонт работы Вам комфортен?",["1–2 года, пока проект встает на ноги","3–5 лет роста","1–3 года трансформации","5 лет и больше","Срок сделки, затем новая задача"]],
+ ["Какой собственник Вам ближе?",["Основатель, который решает быстро","Группа компаний с амбициями роста","Собственник, которому нужен порядок и честный взгляд","Крупная корпорация с процедурами","Инвестор или фонд"]],
+ ["Что для Вас важнее в вознаграждении?",["Доля и потенциал роста стоимости","Рост дохода вместе с бизнесом","Бонус за результат трансформации","Стабильность и полный пакет","Премия за успех сделки"]]
+];
+var R = [
+ ["Запуск","Ваша сила — создавать с нуля и действовать в неопределенности. Максимальную ценность Вы приносите там, где нет готовой системы и нужна скорость. Риск — заскучать, когда все наладится."],
+ ["Рост","Вы строитель систем и команд. Ваша среда — компании, которые масштабируются в 2–3 раза и перерастают свои процессы. Риск — перегрузка, если не выстроить команду вовремя."],
+ ["Трансформация","Вы сильны там, где нужны трудные решения, порядок и смелость. Собственники ценят Вас в кризисе и перестройке. Риск — накопленная усталость от постоянного сопротивления."],
+ ["Зрелость","Ваша ценность — эффективность, контроль и предсказуемость. Вы раскрываетесь в стабильном бизнесе с отлаженными процессами. Риск — замедление собственного роста."],
+ ["Сделка","Вы переговорщик и аналитик: оценка, инвесторы, структура сделки. Ваша среда — компании перед привлечением капитала или продажей. Риск — после сделки роль может исчезнуть."]
+];
+// Порядок вариантов перемешивается, чтобы ответы не выбирались «по строке».
+var order = Q.map(function(){var a=[0,1,2,3,4];for(var i=4;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;});
+var ans = [], cur = 0;
+function $(id){return document.getElementById(id)}
+function show(id){["intro","quiz","result"].forEach(function(s){$(s).classList.toggle("hidden",s!==id)});window.scrollTo(0,0)}
+function render(){
+  $("bar").style.width=(cur/Q.length*100)+"%";
+  $("step").textContent="Вопрос "+(cur+1)+" из "+Q.length;
+  $("q").textContent=Q[cur][0];
+  var box=$("opts"); box.innerHTML="";
+  order[cur].forEach(function(k){
+    var b=document.createElement("button"); b.className="opt"+(ans[cur]===k?" sel":""); b.textContent=Q[cur][1][k];
+    b.onclick=function(){ans[cur]=k; b.classList.add("sel"); setTimeout(next,180)};
+    box.appendChild(b);
+  });
+  $("back").style.visibility=cur?"visible":"hidden";
+}
+function next(){ if(cur<Q.length-1){cur++;render()} else finish() }
+function finish(){
+  var s=[0,0,0,0,0]; ans.forEach(function(k){s[k]++});
+  var idx=[0,1,2,3,4].sort(function(a,b){return s[b]-s[a]||a-b});
+  var top=idx[0], sec=idx[1];
+  $("rTitle").textContent="Ваша среда — «"+R[top][0]+"»";
+  $("rText").textContent=R[top][1];
+  $("rSecond").textContent= s[sec]>0 ? "Второй по силе профиль — «"+R[sec][0]+"». Это значит, что Вы можете быть сильны и в смежной среде, если правильно выстроите роль." : "";
+  var bars=$("bars"); bars.innerHTML="";
+  idx.forEach(function(k){
+    var d=document.createElement("div"); d.className="bar";
+    d.innerHTML='<span>'+R[k][0]+'</span><div class="t"><i style="width:'+(s[k]/Q.length*100)+'%"></i></div><b>'+s[k]+'</b>';
+    bars.appendChild(d);
+  });
+  $("book").href = BOOKING_URL || DM_URL;
+  $("book").textContent = BOOKING_URL ? "Выбрать время встречи" : "Записаться на встречу в Direct";
+  $("dm").href = DM_URL;
+  try{localStorage.setItem("ktoya_result",R[top][0])}catch(e){}
+  show("result");
+}
+$("start").onclick=function(){cur=0;ans=[];render();show("quiz")};
+$("back").onclick=function(){if(cur>0){cur--;render()}};
+$("again").onclick=function(){cur=0;ans=[];render();show("quiz")};
+</script>
+</body>
+</html>
