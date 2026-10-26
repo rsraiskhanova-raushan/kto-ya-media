@@ -158,5 +158,17 @@ $("start").onclick=function(){cur=0;ans=[];render();show("quiz")};
 $("back").onclick=function(){if(cur>0){cur--;render()}};
 $("again").onclick=function(){cur=0;ans=[];render();show("quiz")};
 </script>
+<!-- Статистика посещений (GoatCounter): открытие страницы, начало теста, результат, клик на запись -->
+<script>
+(function(){
+  function ev(path,title){try{if(window.goatcounter&&window.goatcounter.count){window.goatcounter.count({path:path,title:title||path,event:true})}}catch(e){}}
+  document.getElementById("start").addEventListener("click",function(){ev("test-start","Начали тест")});
+  var _finish=finish;
+  finish=function(){_finish();var t="";try{t=localStorage.getItem("ktoya_result")||""}catch(e){}ev("test-result-"+(t||"unknown"),"Результат: "+t);ev("test-finish","Прошли тест до конца")};
+  document.getElementById("book").addEventListener("click",function(){ev("click-booking","Клик: записаться на встречу")});
+  document.getElementById("dm").addEventListener("click",function(){ev("click-direct","Клик: написать в Direct")});
+})();
+</script>
+<script data-goatcounter="https://academia369.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
